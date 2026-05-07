@@ -1,5 +1,5 @@
 package com.mycompany.sewa_camping.model;
-
+//inheritance
 public class Sewa extends Transaksi {
 
     public Sewa(String id) {
