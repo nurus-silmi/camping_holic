@@ -27,7 +27,7 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `total_pendapatan` () RETURNS INT(11) DETERMINISTIC BEGIN
     DECLARE total INT;
-    SELECT SUM(d.jumlah*a.harga*d.lama_hari)
+    SELECT SUM(d.jumlah*a.harga*d.hari)
     INTO total
     FROM detail_transaksi d
     JOIN alat a ON d.id_alat=a.id_alat;
@@ -209,7 +209,7 @@ CREATE TABLE `v_transaksi_detail` (
 --
 DROP TABLE IF EXISTS `v_transaksi_detail`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_transaksi_detail`  AS SELECT `t`.`id_transaksi` AS `id_transaksi`, `p`.`nama` AS `nama`, `a`.`nama_alat` AS `nama_alat`, `d`.`jumlah` AS `jumlah`, `d`.`lama_hari` AS `lama_hari`, `d`.`jumlah`* `a`.`harga` * `d`.`lama_hari` AS `total` FROM (((`transaksi` `t` join `penyewa` `p` on(`t`.`id_penyewa` = `p`.`id_penyewa`)) join `detail_transaksi` `d` on(`t`.`id_transaksi` = `d`.`id_transaksi`)) join `alat` `a` on(`d`.`id_alat` = `a`.`id_alat`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_transaksi_detail`  AS SELECT `t`.`id_transaksi` AS `id_transaksi`, `p`.`nama` AS `nama`, `a`.`nama_alat` AS `nama_alat`, `d`.`jumlah` AS `jumlah`, `d`.`hari` AS `hari`, `d`.`jumlah`* `a`.`harga` * `d`.`hari` AS `total` FROM (((`transaksi` `t` join `penyewa` `p` on(`t`.`id_penyewa` = `p`.`id_penyewa`)) join `detail_transaksi` `d` on(`t`.`id_transaksi` = `d`.`id_transaksi`)) join `alat` `a` on(`d`.`id_alat` = `a`.`id_alat`)) ;
 
 --
 -- Indexes for dumped tables
