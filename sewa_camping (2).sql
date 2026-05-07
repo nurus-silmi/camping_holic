@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 
 --
 -- Database: `sewa_camping`
+CREATE DATABASE IF NOT EXISTS sewa_camping;
+USE sewa_camping; 
 --
 
 DELIMITER $$
